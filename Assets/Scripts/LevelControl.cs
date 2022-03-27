@@ -110,10 +110,17 @@ public class LevelControl : MonoBehaviourSingletonPersistent<LevelControl>
 
     public void CallAnnouncer(string content)
     {
-        announcerText.gameObject.SetActive(true);
-        announcerText.text = content;
-        if (announcerRoutine != null) StopCoroutine(announcerRoutine);
-        announcerRoutine = StartCoroutine(AnnouncerLifetime());
+        try
+        {
+            announcerText.gameObject.SetActive(true);
+            announcerText.text = content;
+            if (announcerRoutine != null) StopCoroutine(announcerRoutine);
+            announcerRoutine = StartCoroutine(AnnouncerLifetime());
+        }
+        catch
+        {
+            return;
+        }
     }
 
     public IEnumerator AnnouncerLifetime()
