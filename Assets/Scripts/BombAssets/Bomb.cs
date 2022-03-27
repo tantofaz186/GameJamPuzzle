@@ -26,13 +26,6 @@ public class Bomb : PlayerKiller
         Explodir();
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Explodir();
-        }
-    }
 
     private void Explodir()
     {
