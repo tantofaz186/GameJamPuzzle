@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     bool isNearWall { get => CheckWall(); }
     bool isWallSliding { get => CheckWallSliding(); }
     bool canWalk;
-    float horizontal;
+    [SerializeField]float horizontal;
     Rigidbody2D body;
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (LevelControl.Instance.ControlEnabled)
         {
@@ -41,13 +41,16 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         if (!canWalk) return;
-        horizontal = Input.GetAxis("Horizontal");
-        body.velocity = new Vector2(horizontal * moveSpeed, body.velocity.y);
-
         if (isWallSliding)
         {
             if (body.velocity.y < wallSlidingSpeed)
                 body.velocity = new Vector2(body.velocity.x, -wallSlidingSpeed);
+            Debug.Log("isWallSliding");
+        }
+        else
+        {
+            horizontal = Input.GetAxis("Horizontal");
+            body.velocity = new Vector2(horizontal * moveSpeed, body.velocity.y);
         }
     }
     void Jump()
@@ -82,6 +85,6 @@ public class PlayerMovement : MonoBehaviour
     }
     bool CheckWallSliding()
     {
-        return isNearWall && !isGrounded && body.velocity.y < 0 && horizontal != 0;
+        return isNearWall && !isGrounded && horizontal != 0;
     }
 }
