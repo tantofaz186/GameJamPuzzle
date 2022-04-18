@@ -205,13 +205,14 @@ MonoBehaviour:
   charHeight: 1.1
   wallDetectingDistance: 0.6
   moveSpeed: 10
-  jumpForce: 20
+  jumpForce: 30
   wallSlidingSpeed: 5
-  wallJumpForce: 5
+  wallJumpForce: 8
   wallJumpDirection: {x: 2, y: 3}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 384
+  horizontal: 0
 --- !u!70 &7519702015133148810
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

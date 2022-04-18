@@ -49,16 +49,18 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            horizontal = Input.GetAxis("Horizontal");
+            //horizontal = Input.GetAxis("Horizontal");
+            horizontal = Mathf.Clamp(Input.mousePosition.x / Screen.width - 0.5f, -1, 1);
             body.velocity = new Vector2(horizontal * moveSpeed, body.velocity.y);
         }
     }
     void Jump()
     {
-        if (Input.GetAxis("Vertical") == 0) return;
+        //if (Input.GetAxis("Vertical") == 0) return;
+        if (!Input.GetMouseButtonDown(0)) return;
         if (isGrounded)
         {
-            body.velocity = jumpForce * Vector2.up;
+            body.velocity += Mathf.Clamp(Input.mousePosition.y / Screen.height - 0.5f, -1, 1) * jumpForce * Vector2.up;
         }
         else if (isWallSliding)
         {
